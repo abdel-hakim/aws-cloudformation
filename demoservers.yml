@@ -76,7 +76,7 @@ Resources:
           docker run -d -p 80:8080 tomcat:8.0
       # Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type - ami-01460aa81365561fe
       #ImageId: ami-01460aa81365561fe  #Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type
-      ImageId: ami-095822e99a7572a5b
+      ImageId: ami-07be6cf8f458f18a8
       #KeyName: udacity1
       SecurityGroups:
       - Ref: WebServerSecGroup
