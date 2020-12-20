@@ -27,7 +27,6 @@ Resources:
         FromPort: 80
         ToPort: 80
         CidrIp: 0.0.0.0/0
- 
       SecurityGroupEgress:                #defines outbound traffic#
       - IpProtocol: tcp
         FromPort: 80
@@ -73,20 +72,22 @@ Resources:
           apt-get update
           apt-get install -y docker-ce
           usermod -aG docker ubuntu
-          docker run -d -p 80:8080 tomcat:8.0
+          docker run -p 80:8080 tomcat:8.0
       # Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type - ami-01460aa81365561fe
       #ImageId: ami-01460aa81365561fe  #Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type
-      ImageId: ami-005bdb005fb00e791
+      ImageId: ami-06d51e91cea0dac8d  #not test it yet
+      #ImageId: ami-005bdb005fb00e791
+      #ImageId: ami-003634241a8fcdec0
       #KeyName: udacity1
       SecurityGroups:
       - Ref: WebServerSecGroup
-      InstanceType: t2.medium
+      InstanceType: t3.small
       BlockDeviceMappings:
       - DeviceName: "/dev/sdk"
         Ebs:
           VolumeSize: '10'
 
-  WebAppGroup:              #not explain in video
+  WebAppGroup:             
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
       VPCZoneIdentifier:
@@ -124,8 +125,6 @@ Resources:
       Port: '80'
       Protocol: HTTP
 
-
-
   # Trigger
 
   ALBListenerRule:
@@ -139,7 +138,6 @@ Resources:
         Values: [/]
       ListenerArn: !Ref 'Listener'
       Priority: 1
-
 
   WebAppTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
